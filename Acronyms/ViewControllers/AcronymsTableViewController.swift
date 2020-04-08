@@ -30,7 +30,7 @@ class AcronymsTableViewController: UITableViewController {
       }
       
       switch acronymResult {
-      case .failfure:
+      case .failure:
         ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
         
       case .success(let acronyms):

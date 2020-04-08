@@ -35,7 +35,7 @@ class CreateUserTableViewController: UITableViewController {
     ResourceRequest<User>(resourcePath: "users")
       .save(user) { [weak self] result in
         switch result {
-        case .failfure:
+        case .failure:
           let message = "There was a problem saving the user"
           ErrorPresenter.showError(message: message, on: self)
           

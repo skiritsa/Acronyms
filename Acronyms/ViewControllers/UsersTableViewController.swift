@@ -29,7 +29,7 @@ class UsersTableViewController: UITableViewController {
       }
       
       switch result {
-      case .failfure:
+      case .failure:
         ErrorPresenter.showError(message: "There was an error getting the users", on: self)
         
       case .success(let users):

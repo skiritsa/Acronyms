@@ -4,7 +4,12 @@ import Foundation
 
 enum GetResourcesRequest<ResourceType> {
   case success([ResourceType])
-  case failfure
+  case failure
+}
+
+enum SaveResult<ResourceType> {
+  case success(ResourceType)
+  case failure
 }
 
 struct ResourceRequest<ResourceType> where ResourceType: Codable {
@@ -20,7 +25,7 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
   func getAll(completion: @escaping (GetResourcesRequest<ResourceType>) -> Void ) {
     let dataTask = URLSession.shared.dataTask(with: resourceURL) { data, _, _ in
       guard let jsonData = data else {
-        completion(.failfure)
+        completion(.failure)
         return
       }
       
@@ -29,9 +34,38 @@ struct ResourceRequest<ResourceType> where ResourceType: Codable {
         completion(.success(resources))
       }
       catch {
-        completion(.failfure)
+        completion(.failure)
       }
     }
     dataTask.resume()
+  }
+  
+  func save( _ resourceToSave: ResourceType, completion: @escaping (SaveResult<ResourceType>) -> Void) {
+    
+    do {
+      var urlRequest = URLRequest(url: resourceURL)
+      urlRequest.httpMethod = "POST"
+      urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+      
+      urlRequest.httpBody = try JSONEncoder().encode(resourceToSave)
+      
+      let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, _) in
+        
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let jsonData = data else {
+          completion(.failure)
+          return
+        }
+        
+        do {
+          let resource = try JSONDecoder().decode(ResourceType.self, from: jsonData)
+          completion(.success(resource))
+        } catch {
+          completion(.failure)
+        }
+      }
+      dataTask.resume()
+    } catch {
+      completion(.failure)
+    }
   }
 }

@@ -29,7 +29,7 @@ class CategoriesTableViewController: UITableViewController {
       }
       
       switch result {
-      case .failfure:
+      case .failure:
         ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
         
       case .success(let categories):
