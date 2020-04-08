@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		046970BD243DDD020002CE46 /* ResourceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046970BC243DDD020002CE46 /* ResourceRequest.swift */; };
+		046972F1243DF5E70002CE46 /* AcronymRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046972F0243DF5E70002CE46 /* AcronymRequest.swift */; };
 		233638932062B99A001588B0 /* AcronymsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233638922062B99A001588B0 /* AcronymsTableViewController.swift */; };
 		236A123F207BFBC400931AD3 /* AddToCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236A123E207BFBC400931AD3 /* AddToCategoryTableViewController.swift */; };
 		23FBBD842066980600DBFA59 /* UsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBBD832066980600DBFA59 /* UsersTableViewController.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		046970BC243DDD020002CE46 /* ResourceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRequest.swift; sourceTree = "<group>"; };
+		046972F0243DF5E70002CE46 /* AcronymRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcronymRequest.swift; sourceTree = "<group>"; };
 		233638922062B99A001588B0 /* AcronymsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcronymsTableViewController.swift; sourceTree = "<group>"; };
 		236A123E207BFBC400931AD3 /* AddToCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCategoryTableViewController.swift; sourceTree = "<group>"; };
 		23FBBD832066980600DBFA59 /* UsersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				23FBBD9020669DAD00DBFA59 /* ErrorPresenter.swift */,
 				046970BC243DDD020002CE46 /* ResourceRequest.swift */,
+				046972F0243DF5E70002CE46 /* AcronymRequest.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A5F2211F4A96D0005CD714 /* AppDelegate.swift in Sources */,
+				046972F1243DF5E70002CE46 /* AcronymRequest.swift in Sources */,
 				046970BD243DDD020002CE46 /* ResourceRequest.swift in Sources */,
 				23FBBD952066A67B00DBFA59 /* CreateUserTableViewController.swift in Sources */,
 				23FBBD9120669DAD00DBFA59 /* ErrorPresenter.swift in Sources */,

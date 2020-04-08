@@ -47,7 +47,31 @@ class AcronymDetailTableViewController: UITableViewController {
   }
 
   func getAcronymData() {
+    guard let id = acronym?.id else  { return }
+    
+    let acronymDetailRequester = AcronymRequest(acronymID: id)
+    
+    acronymDetailRequester.getUser { [weak self] result in
+      switch result {
+      case .success(let user):
+        self?.user = user
+      case .failure:
+        let message =
+          "There was an error getting the acronym’s user"
+        ErrorPresenter.showError(message: message, on: self)
+      }
+    }
 
+    acronymDetailRequester.getCategories { [weak self] result in
+      switch result {
+      case .success(let categories):
+        self?.categories = categories
+      case .failure:
+        let message =
+          "There was an error getting the acronym’s categories"
+        ErrorPresenter.showError(message: message, on: self)
+      }
+    }
   }
 
   func updateAcronymView() {
@@ -58,7 +82,10 @@ class AcronymDetailTableViewController: UITableViewController {
 
   // MARK: - IBActions
   @IBAction func updateAcronymDetails(_ segue: UIStoryboardSegue) {
-
+    guard let controller = segue.source as? CreateAcronymTableViewController else { return }
+    
+    user = controller.selectedUser
+    acronym = controller.acronym
   }
 }
 
