@@ -92,4 +92,12 @@ struct AcronymRequest {
           completion(.failure)
         }
       }
+  
+  func delete() {
+    var urlRequest = URLRequest(url: resource)
+    urlRequest.httpMethod = "DELETE"
+    
+    let dataTask = URLSession.shared.dataTask(with: urlRequest)
+    dataTask.resume()
+  }
 }
