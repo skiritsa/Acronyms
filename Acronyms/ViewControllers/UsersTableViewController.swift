@@ -6,6 +6,7 @@ class UsersTableViewController: UITableViewController {
 
   // MARK: - Properties
   var users: [User] = []
+  let usersRequest = ResourceRequest<User>(resourcePath: "users")
 
   // MARK: - View Life Cycle
   override func viewDidLoad() {
@@ -20,9 +21,27 @@ class UsersTableViewController: UITableViewController {
 
   // MARK: - IBActions
   @IBAction func refresh(_ sender: UIRefreshControl?) {
-    DispatchQueue.main.async {
-      sender?.endRefreshing()
+    
+    usersRequest.getAll { [weak self] result in
+      
+      DispatchQueue.main.async {
+        sender?.endRefreshing()
+      }
+      
+      switch result {
+      case .failfure:
+        ErrorPresenter.showError(message: "There was an error getting the users", on: self)
+        
+      case .success(let users):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.users = users
+          self.tableView.reloadData()
+        }
+        
+      }
     }
+
   }
 }
 

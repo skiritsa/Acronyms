@@ -6,6 +6,7 @@ class CategoriesTableViewController: UITableViewController {
 
   // MARK: - Properties
   var categories: [Category] = []
+  let categoriesRequest = ResourceRequest<Category>(resourcePath: "categories")
 
   // MARK: - View Life Cycle
   override func viewDidLoad() {
@@ -20,9 +21,26 @@ class CategoriesTableViewController: UITableViewController {
 
   // MARK: - IBActions
   @IBAction func refresh(_ sender: UIRefreshControl?) {
-    DispatchQueue.main.async {
-      sender?.endRefreshing()
+    
+    categoriesRequest.getAll { [weak self] result in
+      
+      DispatchQueue.main.async {
+        sender?.endRefreshing()
+      }
+      
+      switch result {
+      case .failfure:
+        ErrorPresenter.showError(message: "There was an error getting the acronyms", on: self)
+        
+      case .success(let categories):
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
+          self.categories = categories
+          self.tableView.reloadData()
+        }
+      }
     }
+
   }
 }
 
